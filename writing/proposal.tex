@@ -1,0 +1,75 @@
+\documentclass{amsart}
+
+\usepackage{parskip}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\author{Oliver Richardson (oer5)}
+\title{CS6241 Final Project: Mining Reddit for Preference Data}
+
+\begin{document}
+	\maketitle
+	
+	\section{Motivation}Role labeling 
+	When formalizing agency, there is a standard assumption that people act to satisfy preferences / utilities which do not change over time --- or at least they ought not to, if the agent is rational. Micro-economists model people in situations where preference changes are not particularly important and time scales are short. At the same time, those interested in machine agency give agents explicit \textit{reward functions} which are part of their identity and have no mechanism for change. This is reflected in the so-called Ghandi-folk theorem: if all you care about is the total number of published papers, why would you modify yourself to care about love? That doesn't publish more papers. 
+	
+	Humans, however, often do not have well-defined preferences, or have very poor access to them. Moreover, they often seem to change their fundamental goals, and obviously form new preferences about things they had previously never experienced or understood --- all of which seem perfectly compatible with rationality.
+	
+	Outside of this class, I'm looking to formalize the theory of rational preference change as a fused combined RL / IRL (inverse reinfocement learning) problem. However, this would be a much better theory if it were empirically validated --- I propose to use reddit as a source of purely frivolous preference data. The karma (upvote/downvote) associated with each post or comment can be thought of as a proxy for the collective preferences of the subset of the community who read and cared about the comment. This system was designed purely to sort through posts, but in doing so, it has exposed annotations of the ``good''-ness of large amounts of text and images in context.
+	
+	
+	\section{Empirical Study}
+	
+	\subsection{Research Questions}
+	Ultimately, we would like to know why people actually change their preferences: whether it is done in a consistent manner, and whether this can be considered rational. To this end, we will discuss the evolution of both individual users and communities' preferences over time. 
+
+	
+	Below is a list of relevant questions that I expect to be able to shed some light on. I am aware that I will not have time for all of them.
+	\begin{enumerate}
+		\item Is there a scale symmetry between individuals and communities --- do the mechanisms by which they appear to change differ substantially beyond the time-scales and numbers of total interactions?
+		
+		\item To what degree do memes bleed from one community to another?
+		\item What determines the lifetime of a meme, beyond noise? Are humans any good at it? We can use \texttt{r/MemeEconomy} to get data on humans predicting meme longevity, plus historical data about how good individuals have been in the past.
+		
+		\item What kinds of posts cause a sub to grow or shrink? 
+		
+		\item How do community preferences evolve over time, as measured directly by statistics of the content, and as measured by the topology of the interactions between users and communities?
+	\end{enumerate}
+
+	
+
+
+
+	
+
+	\section{Outline of Experiments}
+	Reddit can be thought of as a graph data set in a number of different ways; applying the numerical methods we covered in class may reveal different kinds of preference data.
+
+	\subsection{Content Representation $\mathcal T$}
+		
+	First, because I do not want to be doing complex NLP myself for the purposes of this project, I will need to import an existing space $\mathcal T$, and embedding $\eta: \Gamma \times \mathrm{Text} \times \mathrm{Image} \to \mathcal T$, where $\Gamma$ is a context space, equipped with an applicative structure $\mathrm{Text} \times \Gamma \to \Gamma$. This will allow me to embed posts, captions, and images, into a single space for convenience, and be a control for the network analyses that follow.
+	
+	\subsection{Subreddit Drift}
+	The nodes are subs, and there are edges between them corresponding to top-level comments referencing a (different sub). These edges each have a weight and time associated with them (corresponding to the karma and date of the comment), so we can apply the methods presented in class for analyzing temporal graphs.
+	
+	Temporal motifs here correspond to interactions between subs. Even simply by partitioning the graph into time windows, we can see how the subs move about in the induced preference space that we would expect from a node embedding. Moreover, these data can be compared from the data obtained from motion of the average post within the content space $\mathcal T$.
+	
+	Clustering will almost certainly reveal closely linked communities (probably even often explicitly, as many subreddits link to one another in side bars, and the graph generated by these edges can be compared to the one generated temporally through comment links). More importantly for my purposes, the clustering will likely change as time goes on -- when it changes, we would like to identify either graphical motifs or pieces of content space which tend to proceed shifts. Our hope is that the correlations and anti-correlations between content-space and co-reference space will shine some light on why these effects occur.
+	
+	\subsection{User Drift}
+	The nodes are users, and there is an edge $i \to j$ when user $j$ comments on a post or comment made by $i$. These links also have both weights and times associated with them, for the same reasons. This is the structure which most directly addresses the question at hand, because users themselves are definitely agents, and the ways in which they interact with the site reflect their evolving preferences. However, because of small amounts of data for individual users, we expect that it will be difficult to identify a causal picture of this.
+	
+	\subsection{The Reddit Hierarchy and Flow}
+	
+	Comments, posts, and subs are all nodes, and edges between them are sub-post relations: each post has a parent-edge to its sub, and comments have edges to their posts or parent comments. Again, all of these entities have weights (karma / subscribers) and times. 
+	
+	In this case, we expect role labeling to recover which of the nodes are actually comments, posts and subs; this is a sanity check, and shows that the way that people interact with these elements 
+	
+	In some sense, this is the most boring network interpretation of the site, because it is the one shown to users and developers, and is simply an abstraction tree presented to the world. However, if we look at it as a temporally evolving tree, and we additionally consider it as the co-domain of the number of subscribers / karma, we may be able to discover more interesting structure. In particular, if attention is flowing through the graph based on this topology, we might ask if there is a stationary distribution on $\eta$-equivalence classes of nodes (perhaps community dependent), and ask how this stationary distribution shifts over time.
+
+	
+	\section{Numerical Methods: Possibilities for Theoretical Advancement}
+	
+	I suspect that treating groups of users (potentially even large users) as a single users with well-defined preferences as users themselves, will result in very similar analyses. For this reason, we may want to understand graphs not in terms of their small-scale motifs, but rather scale-invariant ones. If I have additional time / energy, or this falls out of the project naturally, then I would like to formalize the effect of collapsing larger groups of nodes into a single one on motif analysis, and design one that is robust to this kind of . This is particularly important from the point of view of tropical geometry, in which collapsed vertices correspond to degenerate polynomials, which mostly behave in exactly the same way as every one of the graphs that they could represent.
+	
+\end{document}
