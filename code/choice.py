@@ -1,6 +1,7 @@
 import numpy as np
 import itertools
 
+from numpy.linalg import svd
 
 def stoch(X):
     return (X.T / np.sum(X.T, axis=0)).T
@@ -60,6 +61,10 @@ def trans_alt(Q, U):
 # np.sum( trans_alt(Q_rand, U), axis =1)
 #################
 
+#from numpy import linalg
 
-def error( Gs, Us ):
+#u, s, vh = svd(trans_alt(Q_rand, U))
+#linalg.det(Q_rand)
+
+# def error( Gs, Us ):
     

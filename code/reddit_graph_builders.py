@@ -8,6 +8,8 @@ import itertools
 import sys, os
 from datetime import datetime,timedelta
 
+from temporal import TGraph
+
 from psaw import PushshiftAPI
 
 reddit = praw.Reddit('bot', user_agent='test script by u/research-oli')
@@ -80,34 +82,44 @@ def make_postshift_graph(
         end_ts = datetime(2019,1,1),
         dt = timedelta(days=1),
         min_comments = 10,
-        n_comment_support = 40,
-        graphs = None
+        comment_support = 40,
+        graph_cache = None
 ):
     ############# CONVERT TIMES #############
+    y_start = y_end = ''
     if type(start_ts) == tuple:
         start_ts = dt.datetime(*start_ts)
     if type(end_ts) == tuple:
         end_ts = dt.datetime(*end_ts)    
     if type(start_ts) == datetime :
+        y_start = str(start_ts.year)[2:]
         start_ts = int(start_ts.timestamp())
     if type(end_ts) == datetime :
+        y_end = str(end_ts.year)[2:]
         end_ts = int(end_ts.timestamp())
     if type(dt) == timedelta:
+        if dt.seconds % 43200 == 0:
+            if dt.days % 7 == 0:
+                dt_str = str(dt.days//7) + 'W'
+            else:
+                dt_str = str(dt.days) + 'D'
         dt =  int(dt.total_seconds())
-     # force day, because we can't query at every aggregation step.
+    else:
+        dt_str = str(dt) + 'S'
+     # force day, because we cangraphs't query at every aggregation step.
     #########################################
     
     # T = (end_ts - start_ts) // dt
     
-    # agg_ncomments = next(papi.search_submissions(before=end_ts, after=start_ts, aggs='subreddit',\
+    # agg_ncomments = next(papi.search_submissionstr(datetime(2017,1,1).year)[2:] s(before=end_ts, after=start_ts, aggs='subreddit',\
     #    num_comments='>'+str(min_comments), agg_size=N, limit=0))['subreddit']      
     
     # sub_names = [ d['key'] for d in agg_ncomments ] # cannoncial ording on subs, forwards
     # sub_idx = { n : i for i,n in enumerate(sub_names) } # backwards lookup on subs. Update as we add more.
     # U = np.zeros((T,N))
     
-    if graphs is None:
-        graphs = []
+    if graph_cache is None:
+        graph_cache = []
     tracked_subs = set()
     
     terminal_cols = os.get_terminal_size(0)[0]
@@ -125,7 +137,7 @@ def make_postshift_graph(
         print(datetime.fromtimestamp(t), '   fetching activity...', end='', flush=True)
         # find all submissions in time window with more than 10 comments; aggregate by subredit.
         comments_agg = next(papi.search_submissions(before=t+dt, after=t, aggs='subreddit',
-             num_comments='>'+str(min_comments), agg_size=(N+1), limit=0,
+             num_comments='>'+str(min_comments), agg_size=(N*2), limit=0,
              subreddit=','.join(tracked_subs)
         ))['subreddit']
         
@@ -138,23 +150,43 @@ def make_postshift_graph(
         for i,v in enumerate(tracked_subs):
             sys.stdout.write('\r'+ str(datetime.fromtimestamp(t))+ '   |' + '='*(i)+ '>' + \
                 '-'*(len(tracked_subs)-i-1)+"|"+' '*17+"\n\t")
-                
-            #batch_request = srch_results = papi.search_comments(q='r/'+v, before=t+dt, after=t,                 aggs='subreddit', sort_type='score', limit=n_comment_support, filter='id')
-
-            for u in tracked_subs:
-                sys.stdout.write('.')
-                sys.stdout.flush()
-                
-                srch_results = papi.search_comments(q='r/'+v, before=t+dt, after=t, subreddit=u, 
-                    aggs='subreddit', sort_type='score', limit=n_comment_support, filter='id')
             
-                try:
-                    n_links = next(srch_results)['subreddit'][0]['doc_count']
-                    top_links = [c.id for c in srch_results]
-                        
-                    G.add_edge(u,v, n_links = n_links, top_linking_comments = top_links)
-                except IndexError:
-                    pass
+            
+            if comment_support is None:
+                batch_request = papi.search_comments(q='r/'+v, before=t+dt, after=t, 
+                    aggs='subreddit', subreddit=','.join(tracked_subs), agg_size=(N*2))
+                link_counts = { (d['key'],v) : d['doc_count'] for d in next(batch_request)['subreddit'] }
+                nx.set_edge_attributes(G, 'nlinks', link_counts)
+
+                ####### THIS IS ERROR CHECKING CODE #####
+                ##### I have already verified that the reason for misses is non-existence.
+                # found = { l[0] for l in link_counts }
+                # missed = tracked_subs - found
+                # if missed:
+                #     picked_up = {}
+                #     for m in missed:
+                #         more_search = papi.search_comments(q='r/'+v, before=t+dt, after=t, subreddit=m, 
+                #         aggs='subreddit')
+                #         try:
+                #             picked_up[m] = next(more_search)['subreddit'][0]['doc_count']
+                #         except:
+                #             pass
+                #     print("\nFound %d in batch: "%len(found), found, "\nMissed %d in batch: "%len(missed), missed, "picked up : ", picked_up, '\n')
+            else:
+                for u in tracked_subs:
+                    sys.stdout.write('.')
+                    sys.stdout.flush()
+                    
+                    srch_results = papi.search_comments(q='r/'+v, before=t+dt, after=t, subreddit=u, 
+                        aggs='subreddit', sort_type='score', limit=comment_support, filter='id')
+                
+                    try:
+                        n_links = next(srch_results)['subreddit'][0]['doc_count']
+                        top_links = [c.id for c in srch_results]
+                            
+                        G.add_edge(u,v, nlinks = n_links, toplinkingcomments = top_links)
+                    except IndexError:
+                        pass
             
             print('\r\t' + ' '*len(tracked_subs), end='', flush=True)
             if i + 1 == len(tracked_subs):
@@ -164,23 +196,16 @@ def make_postshift_graph(
             
         # U = { d['key'] : d['doc_count'] for d in agg_ncomments }
         
-        graphs.append(G)
-    
-    return graphs
+        graph_cache.append(G)
+        # Gs, times, filename, node_attrs, edge_attrs,
+        return TGraph( graph_cache, list(range(start_ts, end_ts,dt)),
+            "G%s_%d" % (dt_str,len(tracked_subs)) + '(%s-%s)'%(y_start,y_end) if y_start and y_end else '',
+            ["activity"], ["nlinks", "toplinkingcomments"])
 
-def save_Gs(Gs, name):
-    for i,G in enumerate(Gs):
-        for e in G.edges:
-            for p, v in G.edges[e].items():
-                newpname = p.replace('_','');
-                G.edges[e][newpname] = G.edges[e][p]
-        for n in G.nodes:
-            for p, v in G.nodes[n].items():
-                newpname = p.replace('_','');
-                G.nodes[n][newpname] = G.nodes[n][p]        
-            
-        nx.write_gml(G, '../data/%s/%d.gml' %(name,i))
+
         
+                                      
+
 
 # def test_print(N):
 #     print("asdf\nfdsa\nasdf");

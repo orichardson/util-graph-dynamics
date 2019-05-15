@@ -2,3 +2,4 @@
 *.aux
 *.log
 data/unused
+code/__pycache__
