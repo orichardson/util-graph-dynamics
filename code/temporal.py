@@ -2,6 +2,7 @@ import os
 import json
 import networkx as nx
 import numpy as np
+from datetime import datetime
 
 from choice import stoch
 
@@ -48,32 +49,55 @@ class TGraph:
                 
             nx.write_gml(G, '../data/tgraphs/%s/%d.gml' %(self.filename,i))
     
-    def V(self):
-        if hasattr(self, '_V'):
+    def V(self, key=None, recompute=False):
+        if hasattr(self, '_V') and not recompute:
             return self._V
             
         nodes = set()
         for G in self.Gs:
             nodes |= set(G.nodes)
             
-        self._V = sorted(nodes)
+        self._V = sorted(nodes,key = key)
         return self._V
+        
+    def sortVbyU(self):
+        self.V(key = lambda n:sum(G.nodes.get(n,{self.u_attr:0})[self.u_attr] for G in self.Gs) / len(self.Gs), recompute=True )
             
         
+    def trim(self):
+        n = len(self.Gs)
+        self.times = self.times[:n]
+        if self.filename[-7]+self.filename[-4]+self.filename[-1] == '(-)':
+            self.filename = self.filename[:-3]+str(datetime.fromtimestamp(self.times[-1]).year)[2:]+')'
+            print("New Filename: "+ self.filename)
+        
+    def __repr__(self):
+        t_ss, t_es = (datetime.fromtimestamp(t).strftime('%b %y') \
+                for t in [self.times[0],self.times[-1]])
+        
+        return f"<TGraph with {len(self.V())} nodes across {len(self.Gs)} steps [{t_ss} -- {t_es}]\n\t" + \
+            f" U: {self.u_attr};  W: {self.q_attr}>" 
     
-    def QQ(self):
+    def Ws(self, clear_diag = False):
         if self.q_attr is None:
             raise ValueError("No attribute to build matrix weights from; set q_attr first")
-        
-        
-        Qs = []
+
+        Ws = []
         V = self.V()
         for G in self.Gs:
             W = nx.adj_matrix(G, weight=self.q_attr, nodelist=V).toarray() + np.eye(len(V)) / 1E7
-            # np.fill_diagonal(W, 0)
-            Qs.append(stoch(W))
+            if clear_diag:
+                np.fill_diagonal(W, 0)
+            Ws.append(W)
         
-        return np.dstack( tuple(Qs) )
+        return np.stack( tuple(Ws), axis=0)            
+                
+    def get_transitions(self):
+        Ws = self.Ws()
+        
+        Qs.append(stoch(W))
+        
+        return np.stack( tuple(Qs), axis=0)
 
 def gload(fname):
     try:

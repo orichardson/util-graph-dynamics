@@ -1,5 +1,6 @@
 *.pdf
 *.aux
 *.log
+praw.ini
 data/unused
 code/__pycache__

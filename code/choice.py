@@ -4,7 +4,10 @@ import itertools
 from numpy.linalg import svd
 
 def stoch(X):
-    return (X.T / np.sum(X.T, axis=0)).T
+    return X / np.sum(X, axis=1)[:, None]
+    
+def stoch3(X):
+    return X / np.sum(X, axis=2)[:,:,None]
 
 def logit(U):
     n_vert = len(U)
@@ -52,6 +55,31 @@ def trans_alt(Q, U):
     
 
 
+def mshow( M, ms_delay=100):
+    import matplotlib.pyplot as plt
+    import matplotlib.animation as animation
+
+    if len(M.shape) == 2:
+        plt.matshow(M, cmap='Blues')
+        plt.axis('off')
+        plt.show()
+    elif len(M.shape) == 3:
+        fig = plt.figure()
+        ax = plt.gca()
+
+        ims = []
+        for mat in M:
+            im = plt.imshow(mat, cmap='Blues', animated=True)
+            ims.append([im])
+
+        ani = animation.ArtistAnimation(fig, ims, interval=ms_delay, blit=True,
+                                        repeat_delay=1000)
+        mshow.cur_ani = ani
+        mshow.save = ani.save
+        # ani.save('dynamic_images.mp4')
+
+        plt.show()
+    
 ## some tests ##    
 # Q_rand = stoch(np.random.rand(5,5))
 # U = np.random.rand(5,)
