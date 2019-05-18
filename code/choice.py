@@ -21,10 +21,12 @@ def logit(U):
 
 #################### transformation functions. ################
 
-def transform(Q, U, k): 
+def transform_old(Q, U, k):
+    #######!! Time: 15s / run
+
     n_vert = len(Q)
     A = np.zeros(np.shape(Q))
-    
+        
     for N in itertools.product(*[range(n_vert) for i in range(k)]):
         normalizer = sum(np.exp(U[s]) for s in set(N))
         for u in range(n_vert):
@@ -33,11 +35,31 @@ def transform(Q, U, k):
                     A[u,v] += np.prod([Q[u,s] for s in N]) * np.exp(U[v]) / normalizer
                     
     return A
-
     
+def transform(Q, U, k): 
+    n_vert = len(Q)
+    A = np.zeros(np.shape(Q))
+    
+    eU = np.exp(U)
+    
+    for N in itertools.product(*[range(n_vert) for i in range(k-1)]):
+        normalizer = eU[list(set(N))].sum()
+        
+        for u in range(n_vert):
+            prodQN = np.prod(Q[u,N])
+
+            for v in range(n_vert):
+                A[u,v] += prodQN * eU[v] / (normalizer + eU[v])
+
+                    
+    return k * Q * A
+    
+
+
 def trans_alt(Q, U):
     A = np.zeros(Q.shape)    
     eU = np.exp(U)
+    # print('U', U, 'eU', eU)
     A = Q / (1 + np.outer(eU, 1/eU) ) # exp(U[i] - U[j])
 
     np.fill_diagonal(A, 0)
@@ -52,33 +74,8 @@ def trans_alt(Q, U):
     #     A[i,i] = Q[i,i] + sum( Q[i,s] / (1 + np.exp(U[s] - U[i])) for s in range(n) if i != s)
 
     return A    
-    
 
 
-def mshow( M, ms_delay=100):
-    import matplotlib.pyplot as plt
-    import matplotlib.animation as animation
-
-    if len(M.shape) == 2:
-        plt.matshow(M, cmap='Blues')
-        plt.axis('off')
-        plt.show()
-    elif len(M.shape) == 3:
-        fig = plt.figure()
-        ax = plt.gca()
-
-        ims = []
-        for mat in M:
-            im = plt.imshow(mat, cmap='Blues', animated=True)
-            ims.append([im])
-
-        ani = animation.ArtistAnimation(fig, ims, interval=ms_delay, blit=True,
-                                        repeat_delay=1000)
-        mshow.cur_ani = ani
-        mshow.save = ani.save
-        # ani.save('dynamic_images.mp4')
-
-        plt.show()
     
 ## some tests ##    
 # Q_rand = stoch(np.random.rand(5,5))

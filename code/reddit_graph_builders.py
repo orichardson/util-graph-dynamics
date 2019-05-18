@@ -88,9 +88,9 @@ def make_postshift_graph(
     ############# CONVERT TIMES #############
     y_start = y_end = ''
     if type(start_ts) == tuple:
-        start_ts = dt.datetime(*start_ts)
+        start_ts = datetime(*start_ts)
     if type(end_ts) == tuple:
-        end_ts = dt.datetime(*end_ts)    
+        end_ts = datetime(*end_ts)    
     if type(start_ts) == datetime :
         y_start = str(start_ts.year)[2:]
         start_ts = int(start_ts.timestamp())
@@ -106,7 +106,7 @@ def make_postshift_graph(
         dt =  int(dt.total_seconds())
     else:
         dt_str = str(dt) + 'S'
-     # force day, because we cangraphs't query at every aggregation step.
+     # force day, because we can't query at every aggregation step.
     #########################################
     
     # T = (end_ts - start_ts) // dt
@@ -212,7 +212,8 @@ def make_postshift_graph(
 
 
         
-                                      
+def betterUs( asdf : TGraph ):
+    pass                      
 
 
 # def test_print(N):

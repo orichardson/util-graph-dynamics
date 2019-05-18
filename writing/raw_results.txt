@@ -1,0 +1,86 @@
+
+Score [0.00006581] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00006625] computed for  trans_alt α=0.06*  for inclU =  norm10
+Score [0.00006608] computed for  trans_alt α=0.04+  for inclU =  norm10
+Score [0.00006641] computed for  trans_alt α=0.04*  for inclU =  norm10
+Score [0.00006577] computed for  trans_alt α=0.11+  for inclU =  norm10
+Score [0.00006629] computed for  trans_alt α=0.11*  for inclU =  norm10
+Score [0.00006703] computed for  $Q$  for inclU =  norm10
+Score [0.00672640] computed for  AvgQInv  for inclU =  norm10
+
+----- 0.5 testfraction ----
+
+Score [0.00004734] computed for  trans_alt α=0.06+  for inclU =  norm30
+Score [0.00004744] computed for  trans_alt α=0.04+  for inclU =  norm30
+Score [0.00004808] computed for  trans_alt α=0.13+  for inclU =  norm30
+Score [0.00004805] computed for  $Q$  for inclU =  norm30
+Score [0.00053541] computed for  AvgQInv  for inclU =  norm30
+
+
+run_regressions(TG, norm=1, test_fraction=1)                         
+Score [0.00006567] computed for  trans_alt α=0.06+  for inclU =  norm1
+Score [0.00006596] computed for  trans_alt α=0.04+  for inclU =  norm1
+Score [0.00006591] computed for  trans_alt α=0.13+  for inclU =  norm1
+Score [0.00006813] computed for  trans_alt α=0.2+  for inclU =  norm1
+Score [0.00006710] computed for  transform k=2 α=0.13+  for inclU =  norm1
+Score [0.00006703] computed for  $Q$  for inclU =  norm1
+Score [0.00672640] computed for  AvgQInv  for inclU =  norm1
+
+run_regressions(TG, norm=0.1, test_fraction=1)                       
+Score [0.00006565] computed for  trans_alt α=0.06+  for inclU =  norm0.1
+Score [0.00006594] computed for  trans_alt α=0.04+  for inclU =  norm0.1
+Score [0.00006592] computed for  trans_alt α=0.13+  for inclU =  norm0.1
+Score [0.00006821] computed for  trans_alt α=0.2+  for inclU =  norm0.1
+Score [0.00006703] computed for  $Q$  for inclU =  norm0.1
+Score [0.00672640] computed for  AvgQInv  for inclU =  norm0.1
+
+
+
+---------- Expensive methods ---------
+
+Score [ 0.0000452292 ] computed for  $Q$  for inclU =  None
+Score [ 0.0001001574 ] computed for  SGDRegressor  for inclU =  None
+Score [ 0.0001005353 ] computed for  LinearSVR  for inclU =  None
+Score [ 0.0002100424 ] computed for  SVR  for inclU =  None
+Score [ 0.0000444338 ] computed for  trans_alt  for inclU =  norm10
+Score [ 0.0000452292 ] computed for  $Q$  for inclU =  norm10
+Score [ 0.0001122891 ] computed for  SGDRegressor  for inclU =  norm10
+Score [ 0.0001467097 ] computed for  LinearSVR  for inclU =  norm10
+Score [ 0.0002098722 ] computed for  SVR  for inclU =  norm10
+
+
+
+======================== G4D_9 ==========================
+Score [0.00022686] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00022829] computed for  trans_alt α=0.04+  for inclU =  norm10
+Score [0.00022461] computed for  trans_alt α=0.13+  for inclU =  norm10
+Score [0.00023277] computed for  transform k=2 α=0.13+  for inclU =  norm10
+Score [0.00061466] computed for  transform k=3 α=0.13+  for inclU =  norm10
+Score [0.00023220] computed for  $Q$  for inclU =  norm10
+Score [0.10079138] computed for  AvgQInv  for inclU =  norm10
+
+
+======================== G4D_15 ==========================
+
+run_regressions(G4D_15, test_fraction=0.9)                                                           
+Score [0.00007000] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00007035] computed for  trans_alt α=0.04+  for inclU =  norm10
+Score [0.00006948] computed for  trans_alt α=0.13+  for inclU =  norm10
+Score [0.00007296] computed for  transform k=2 α=0.13+  for inclU =  norm10
+Score [0.00007132] computed for  $Q$  for inclU =  norm10
+Score [0.00041164] computed for  AvgQInv  for inclU =  norm10
+
+Score [0.00009768] computed for  trans_alt α=0.06+  for inclU =  norm30
+Score [0.00009832] computed for  trans_alt α=0.04+  for inclU =  norm30
+Score [0.00009648] computed for  trans_alt α=0.13+  for inclU =  norm30
+Score [0.00010422] computed for  transform k=2 α=0.13+  for inclU =  norm30
+Score [0.00009997] computed for  $Q$  for inclU =  norm30
+Score [0.04577666] computed for  AvgQInv  for inclU =  norm30
+
+run_regressions(G4D_15, norm=10, test_fraction=1)   
+Score [0.00009735] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00009813] computed for  trans_alt α=0.04+  for inclU =  norm10
+Score [0.00009536] computed for  trans_alt α=0.13+  for inclU =  norm10
+Score [0.00010259] computed for  transform k=2 α=0.13+  for inclU =  norm10
+Score [0.00009997] computed for  $Q$  for inclU =  norm10
+Score [0.04577666] computed for  AvgQInv  for inclU =  norm10

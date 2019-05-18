@@ -93,18 +93,30 @@ class TGraph:
         return np.stack( tuple(Ws), axis=0)            
                 
     def get_transitions(self):
-        Ws = self.Ws()
+        return stoch3(self.Ws())
         
-        Qs.append(stoch(W))
+    def Us(self):
+        return np.stack( [[ G.nodes.get(n,{self.u_attr:0}).get(self.u_attr,0) \
+            for n in self.V()] for G in self.Gs], axis=0 )
         
-        return np.stack( tuple(Qs), axis=0)
+    def convolve( self, ker ):
+        pass
+        
+    def __mul__(self, ker):
+        return self.convolve(ker)
+        
 
 def gload(fname):
+    defaults = dict(filename = fname, times = None, node_attrs = [], edge_attrs=[], q_attr = "nlinks", u_attr="activity")
     try:
         with open('../data/tgraphs/%s/meta.json'%fname) as meta_file:
-            data = json.load(meta_file) 
+            data = json.load(meta_file)
+        
+        for k, v in defaults.items():
+            if k not in data:
+                data[k] = v 
     except:
-        data = dict(filename = fname, times = None, node_attrs = [], edge_attrs=[])
+        data = defaults
         
     Gs = []
     i = 0
@@ -116,7 +128,7 @@ def gload(fname):
         except FileNotFoundError:
             break
             
-    if data['times'] is None:
+    if 'times' not in data or data['times'] is None:
         data['times'] = list(range(i))
         
     return TGraph(Gs, **data)

@@ -1,6 +1,13 @@
 *.pdf
 *.aux
 *.log
+*.bbl
+*.bcf
+*.blg
+*.out
+*.synctex.gz
+*.run.xml
 praw.ini
 data/unused
 code/__pycache__
+

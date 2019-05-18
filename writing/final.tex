@@ -1,0 +1,420 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{parskip}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{relsize}
+
+\usepackage{thmtools}
+\declaretheoremstyle[%
+spaceabove=-3pt,%
+spacebelow=12pt,%
+headfont=\normalfont\itshape,%
+postheadspace=1em,%
+qed=\qedsymbol%
+]{mystyle} 
+\declaretheorem[name={Proof},style=mystyle,unnumbered,
+]{prf}
+\newtheorem{prop}{Proposition}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{prefs.bib}
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage[colorlinks=true, citecolor=deepgreen]{hyperref}
+\usepackage{listings}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+\newcommand{\noised}[2]{\left[#1 \stackrel{\gets}{\sim } #2\right]}
+
+% Python style for highlighting
+%\usepackage{courier}
+
+
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{9} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{9}  % for normal
+
+\newcommand\pythonstyle{\lstset{
+		language=Python,
+		basicstyle=\footnotesize\ttm,
+		breaklines=true
+		otherkeywords={self},             % Add keywords here
+		keywordstyle=\ttb\color{deepblue},
+		emph={MyClass,__init__},          % Custom highlighting
+		emphstyle=\ttb\color{deepred},    % Custom highlighting style
+		stringstyle=\color{deepgreen},
+		frame=,                         % Any extra options here
+		showstringspaces=false            % 
+}}
+\lstnewenvironment{python}[1][]
+{
+	\pythonstyle
+	\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+		\pythonstyle
+		\lstinputlisting[#1]{#2}}}
+
+\author{Oliver Richardson (oer5)}
+\title{CS6241 Final Project: Mining Reddit for Preferences}
+
+\begin{document}
+	\maketitle
+	
+	\section{Introduction}
+	
+	\section{Related Work}
+	
+	\section{Temporal Graph Representations}
+	There are many ways of thinking of a graph with temporal information. In class, we saw the formulation presented in \cite{paranjape2017motifs}, in which a temporal graph $T = (V, E)$, where $V$ is a set of vertices (as usual), and $E \subseteq V^2 \times  \mathbb R$ is a collection of time stamped edges. Let $\mathsf{TG}$ be the set of temporal graphs of this kind.
+	
+	Often people prefer to think of a ``temporalized'' version of a mathematical object $O$ as being a function $\mathbb R \to O$ which gives an object at every point in time. A `temporal graph' of this kind, then, is a graph $G(t) = (V_t, E_t)$ for every time $t$; let $\mathfrak{T}$ be the set of temporal graphs of this kind. If we assume that the vertex set $V_t$ is constant, there are two different ways of embedding the temporal graphs in \cite{paranjape2017motifs}. The first is to simply take the slice $G_{=t}$ of $t$ at time $t$ to be the subgraph which has exactly $t$ as its timestamp.
+	
+	\begin{align*}
+		(-)_{=}&: \mathsf{TG} \to \mathfrak T \\
+		&(V, E) \mapsto ~\lambda t.\left( ~V,~\Big\{ (u,v)~\Big|~(u,v,t)\in E \Big\}~\right)
+	\end{align*}
+	
+	Assuming $V_t$ is constant, $(-)_=$ is a bijection, with inverse on edges given by $E \mapsto \{ (u,v,t) \mid \exists t. (u,v) \in E(t) \}$. Of course, this structure is very discontinuous in time, and worse, the set of times $t$ such that the graph slices $E_t$ are inhabited has zero measure. It is reminiscent of a density function. To solve the latter problem, we can integrate over time to get a cumulative graph:
+	\[ G_{\leq t} =  \int_0^t (G_{=\tau} )~\mathrm d \tau :=
+		 \left( \bigcup_{\tau : [0,t]} V(G_{=\tau}), ~\bigcup_{\tau : [0,t]} E(G_{=\tau}) \right)\]
+	
+	More explicitly, this gives the following alternate embedding of $\mathsf{TG}$ into $\mathfrak T$:
+	\begin{align*}
+	(-)_{\leq}&: \mathsf{TG} \to \mathfrak T \\
+	&(V, E) \mapsto ~\lambda t.\left( ~V,~\Big\{ (u,v)~\Big|~\exists \tau \leq t.~(u,v,\tau)\in E \Big\}~\right)
+	\end{align*}
+	
+	
+	
+	\subsection{Weighted Temporal Graphs and Convolution}
+	When analyzing temporal graphs, we generally are not interested in the exact times that things happen, but rather we assume that there is some underlying stochastic process that one might like to shed light on. For this reason, we think of the actual data as samples from a stochastic process, rather than the ground truth about what the graph ought to look like.
+	
+	
+	If $G \in \mathfrak T$, then we have an adjacency matrix $A_G(t) : V^2 \to \{0,1\}$ for each time $t$. Continuing our search for continuity, we will add weights to the edges so that $A_G(t) : V^2 \to \mathbb R$ is instead a real-valued function, which can represent partial edges. We can now add, scale, and integrate graphs (with a fixed vertex set) by adding, scaling, or integrating their adjacency matrices.
+	%\[ \alpha G + \beta H  = \] 
+	Under this interpretation, the integral we wrote earlier may be clearer. We will now show that the representations discussed above can all be expressed in terms of convolutions.
+	
+	Given a temporal graph $\mathfrak T$ and a kernel function $\phi: \mathbb R \to \mathbb R$, we can define the convolution
+	\begin{equation*}
+		G \ast \phi := \lambda t.~\int_{\mathbb R}  \phi(t - \tau)(G(\tau))~\mathrm d \tau
+	\end{equation*}
+	
+	In particular,
+	\begin{itemize}
+		\item 
+		 the cumulative graph is a convolution with the Heaviside function $\mathbbm{1}(t) = \begin{cases}
+		0 & t < 0 \\ 1 & t \geq 0
+		\end{cases}$
+		\begin{equation*}
+			G_{\leq t} = \int_{-\infty}^t (G_{=\tau} )~\mathrm d \tau  = \int_{\mathbb R} \mathbbm{1}(t - \tau) (G_{=\tau} )~\mathrm d \tau = G_{=} \ast \mathbbm{1} 
+		\end{equation*}
+		
+		\item The windowed graph is a convolution with a window $W_{\pm T}(t) = \begin{cases} 1 & t \in [-T, T]\\ 0 & \text{otherwise}\end{cases}$
+		\begin{equation*}
+		G_{t \pm T} = \int_{t-T}^{t+T} (G_{=\tau} )~\mathrm d \tau  = \int_{\mathbb R} W(t- \tau) (G_{=\tau} )~\mathrm d \tau = G_{=} \ast W_{\pm T} 
+		\end{equation*}	
+		
+		\item The static graph, obtained by deleting all timing information, can be thought of as a convolution with the constant function $\mathbf 1$:
+		\begin{equation*}
+			G[:] = \int_{-\infty}^{\infty} (G_{=\tau} )~\mathrm d \tau  = \int_{\mathbb R} 1 \cdot (G_{=\tau} )~\mathrm d \tau = G_{=} \ast \mathbf 1 
+		\end{equation*}
+	\end{itemize}
+	We can also use Gaussian kernels for smoothing, exponential decay, and so forth. One should think of the kernel as the persistence of edges over time.
+	
+	\subsection{Distance Metrics on Temporal Graphs}
+	For non-temporal weighted graphs with the same vertex set, there may be a number of reasonable distance metrics, depending on the application, but since we don't really have a good way to differentiate between edges in the general case, for now we will use the Frobenius norm on adjacency matrices, i.e.,
+	\[ d(G,H) = \Big\lVert G - H \Big\rVert_F :=  \Big\lVert A(G) - A(H) \Big\rVert_F = \sum_{u,v \in V} | G_{u,v} - H_{u,v} |^2 \]
+	% =\Big\langle G, H \Big\rangle
+	
+	While this may work well for static graphs, integrating it over time is a terrible idea for dynamic ones --- to see this, let $Q$ be a static weighted graph on a vertex set $V$, $G$ be $Q$ with all edges annotated with a time $t_0$, and $G'$ be $Q$ with all edges annotated with the time $t_0 + \epsilon$, for some vanishingly small $\epsilon$. While $G$ and $G'$ are $\epsilon$-close in some sense (perhaps even the same graph differing by a small timing measurement error), the integrated distance is $2\lVert Q \rVert_F$, and in particular, larger than the distance between $G$ and the trivial 0-weighted graph.
+	
+	The solution to this is to allow some bleed-over between times: implicitly, we are thinking of time as being somehow persistent. Given some kernel function $k$, we can define a time-smoothed norm on temporal graphs which we can integrate over:	
+	\begin{align*}
+		\Big\langle -,= \Big\rangle_k: \mathfrak T^2 \to \mathbb R \\
+		\Big\langle G, H \Big\rangle_k &:= \int_{\mathbb R}\Big\lVert (A(G) \ast k - A(H) \ast k)(t) \Big\rVert_F~\mathrm d t\\
+		&= \int_{\mathbb R} \Big\lVert [(G - H) * k](t) \Big\rVert_F~\mathrm d t 
+	\end{align*} 
+	
+	Note that, while we had motivated this as a distance metric, the final form is only in terms of the difference between the two temporal graphs, making it implicitly a norm. Define $\lVert \cdot \rVert_k : \mathfrak T \to \mathbb R$ by
+	
+	\begin{equation*}
+		\lVert G \rVert_k = \int_{\mathbb R} \Big\lVert [G * k](t) \Big\rVert_F~\mathrm d t 
+	\end{equation*}
+	\[ \]
+	 
+	\begin{defn}
+		If $T = (V,E) \in \mathsf{TG}$ is a temporal graph and $D$ is a distribution on time offsets, let 
+		\[ \noised T D := \left(V,~\Big\{ (u,v,t +d) ~\Big|~ (u,v,t) \in E,~d \sim D \Big\}\right) \]
+	\end{defn}
+	
+	\begin{conj}
+		If $k$ is $c$-Lipschitz, $D$ is a distribution with zero mean, and $T \in \mathsf{TG}$ is a temporal graph, then 
+		\[ \Pr \left(\left\lVert \noised T {D} _= -~T_= \right\rVert_k \geq \epsilon \right)\leq \frac{c \mathrm{Var}(D)}{\epsilon^2} \]
+	\end{conj}
+	\begin{center}
+		\begin{align*}
+			\left\langle \noised T {D} _= -~T_= \right\rangle_k
+				 &= \int_{\mathbb R} \left\lVert \left[\left( \noised T {D} _= - T_=\right) * k\right] (t) \right \rVert_F ~\mathrm d t \\
+				 &= \int_{\mathbb R} \left\lVert \int_{\mathbb R} k(t - \tau)\left( \noised T {D} _{=\tau} - T_{=\tau}\right)~\mathrm d \tau \right \rVert_F ~\mathrm d t\\
+				 &= \int_{\mathbb R} \left\lVert \left(\int_{\mathbb R} k(t - \tau) \noised T {D} _{=\tau} ~\mathrm d \tau\right) - 
+				 \left( \int_{\mathbb R} k(t - \tau)  T_{=\tau}\right) \right \rVert_F ~\mathrm d t\\
+				 &= \cdots
+		\end{align*}
+	\end{center}
+	
+	\subsection{The Optimization Problem}
+	
+	This leads us to the following problem: given subspace $\mathfrak S \subseteq \mathfrak T$ of temporal graphs with some desired properties: perhaps smoothness, low number of parameters, etc., and a particular weighted temporal graph $G \in \mathfrak T$, can we find the closest one $H^* \in \mathfrak S$ to $T$?
+	
+	\[ H^* = \arg\min_{H \in \mathfrak S} \Big\lVert H  - G \Big\rVert_k \]
+	
+	
+	\section{Utilities on Graph Nodes}
+	Thus far, we have been considering temporal graphs with edge weights. However, in addition to link strength, we had also wanted to model utilities in the nodes themselves: in our experiments, the nodes will be subreddits, posts, or comments, all of which have some measure of quality for the node itself.
+	
+%	Accordingly, suppose we have a utility function $U : V \to \mathbb R$ on the nodes of a temporal graph.
+	
+	\subsection{Simple Logit}
+	To begin, let's note what happens in the extremely simple case where the population is modeled by a single chooser, selecting between the nodes of a graph whose edges don't matter. If this chooser has utility $U : V \to \mathbb R$, and we assume noisy selection drawn from a gumble distribution, then we recover a simple softmax of utilities. This distribution is determined purely by intrinsic utility functions of nodes, making choices purely based on the best utility induces a Markov process $P : V^2 \to \mathbb R$ whose transition probabilities are	
+	\[ P_{i,j} \propto \exp (U_i - U_j) \]%\frac{\exp(U_u)}{\displaystyle\sum_{v \in V} \exp(U_v)} \]
+	
+	On the other extreme, if all nodes are equally good, and we just diffuse through the network according to some random walk, perhaps with a Markov process with stochastic matrix $P : V^2 \to \mathbb R$. These could be defined by weighted probability distribution over the weights (if non-negative).
+	
+	\subsection{Mixing Models}
+%	\subsubsection{Stochastic Matrix Mixing}
+%	If $P$ and $Q$ are two stochastic matrices defining transition probabilities on $V$, we might want to interpolate between them, mixing some of their properties.
+%	Given any function $F : \mathbb R^+ \times \theoremmathbb R^+ \to \mathbb R^+$, we can define a function $\mathrm{Mix}^F_{P,Q} : \mathrm{Stoch}(V) \times \mathrm{Stoch}(V) \to \mathrm{Stoch}(V)$, which creates a new stochastic matrix using $F$ as a scoring function.
+%	\[ \Big[\mathrm{Mix}^F_{P,Q}\Big]_{i,j}  \propto~ F( P_{i,j}, Q_{i,j} ) \]
+%	
+%	Explicitly,
+%	\[ \Big[\mathrm{Mix}^F_{P,Q}\Big]_{i,j} = \dfrac{F( P_{i,j}, Q_{i,j} )}{\displaystyle\sum\limits_{v \in V} F( P_{i,v}, Q_{i,v} )} \]
+%	
+%%	which is defined whenever $F$ is guaranteed to be non-zero .
+%	In the case where $F(a,b) = ab$ is just multiplication, and either $P$ or $Q$ comes from a logit model, we have
+%	
+%	\[ \Big[\mathrm{Mix}^F_{P,Q}\Big]_{i,j} = \cfrac{  e^{u_j} Q_{i,j} }{\displaystyle\sum\limits_{v \in V} e^{u_v} Q_{i,v} } \]
+%	
+%	
+%	\subsubsection{Model I}
+	Imagine the following procedure: at node $u$, we draw a non-empty `neighborhood' (which we may or may not require to include $u$ itself) $N_u \subseteq V$ from some distribution depending on the transition probabilities, which favors nodes easy to get to from $u$. From there, we choose an element of $N$ with probability proportional to the softmax of their utilities. This procedure defines a Markov process whose matrix $P$ is given by
+	
+	\begin{equation}
+		P = (u,v) \mapsto \mathlarger{\sum}_{{N \subseteq V}} \left[ \Pr(N; u)~\cfrac{ e^{U_v}  (\mathbbm 1_{v \in V}) }{ \displaystyle \sum\limits_{ s \in N } e^{U_s}  (\mathbbm 1_{v \in N})} \right]
+		%\left(\prod_{s \in N}Q_{u,s}\right) \left(~\prod_{s \notin N}(1- Q_{u,s}) )\right)
+	\end{equation}
+	
+	where $\mathbbm 1_{\varphi}$ is an indicator function for the proposition $\varphi$. I have written out the indicator in the bottom sum to more explicitly show that this is (the limit of) a mixed logit model, where the neighborhood $N$ is a latent variable, whose only role is to mask off alternatives that are not observed.
+	
+	The probability $\Pr(N; u)$ on neighborhoods could be constructed in many reasonable ways --- one could use random walks, even non-Markov ones, to generate paths, and sample from the probability of a given vertex appearing. To analyze the behavior in closed form, we will start by imposing the relatively minor restriction that the neighborhood probabilities depend only on some transition probabilities given by a stochastic matrix $Q$. Re-interpreting the above formula, this gives us a transformer 
+
+	\begin{equation}
+		\begin{aligned}
+			\Psi&:\mathrm{Stoch}(V) \to \mathrm{Stoch}(V) \\
+			\Psi(Q) &:=(u,v) \mapsto \mathlarger{\sum}_{{N \subseteq V}} \left[ \Pr(N; u, Q)~\cfrac{ e^{U_v} (\mathbbm 1_{v \in N})  }{ \displaystyle \sum\limits_{ s \in N } e^{U_s} } \right]
+		\end{aligned}
+	\end{equation}
+	
+	A natural question now becomes: when does $\Psi$ have a fixed point? Or equivalently, what are the $\Psi$-stationary stochastic matrices on $V$? In the context of the reddit analysis, such a matrix can be interpreted as an equilibrium flow of attention, where the appropriate attention (aside from some noise) is directed at the highest utility objects
+	
+	To answer this question, we need to nail down $\Pr(N;u)$ a bit more; the remainder of this section will go through the details for specific neighborhood selection choices.
+	
+	\subsubsection{$k$-Sample Neighborhoods}
+	
+	Suppose that our neighborhood is given by $k$ i.i.d. samples from the transition probabilities $Q_{u,-}$ out of node $u$. In this case, $\Pr(N;u,Q) = \prod_{s} Q_{u,s}$ and so our transformer becomes
+	
+	\begin{equation}
+		\Big[\Psi^{(k)}(Q)\Big]_{u,v} := \mathlarger{\sum}_{N \in V^{k}} \left[\left(\prod_{s \in N}Q_{u,s}\right) ~\cfrac{ e^{U_v}  (\mathbbm 1_{v \in N})}{ \displaystyle \sum\limits_{ s \in N } e^{U_s} } \right]
+	\end{equation}
+	
+	First, a few sanity checks: in the specific case where $k = 1$, we get $\Pr(\{j\}; u, Q) = Q_{u,j}$, the transition probability, which is what we had wanted.\\
+	
+	\begin{prop}
+		$\prod_{s \in N}Q_{u,s}$ is a pdf over $N \subseteq V$ of size $k$ , i.e., it is positive and integrates to one.
+	\end{prop}
+	\begin{prf}
+		\begin{align*}
+			\sum_{N \in V^{k}}\prod_{s \in N}Q_{u,s} &= 
+				\sum_{n_1 \in V} \sum_{n_2 \in V}\cdots \sum_{n_k \in v} \Big(Q_{u,n_1}Q_{u,n_2} \cdots Q_{u,n_k}\Big) \\
+				&= \sum_{n_1 \in V} Q_{u,n_1} \Big(\sum_{n_2 \in V}Q_{u,n_2} \Big( \cdots \sum_{n_k \in v} \Big(Q_{u,n_k}\Big)\cdots\Big)\Big) \\
+				&= \Big(\sum_{n_2 \in V}Q_{u,n_2} \Big( \cdots \sum_{n_k \in v} \Big(Q_{u,n_k}\Big)\cdots\Big)\Big) \Big(\sum_{n_1 \in V} Q_{u,n_1} \Big)\\
+				&\hspace{1in}\vdots\\
+				&= \prod_{i=1}^k \Big( \sum_{n_2 \in V}Q_{u,n_i} \Big) \quad
+				=\quad \prod_{i=1}^k (1) \quad=\quad 1
+		\end{align*}
+	\end{prf}
+
+	Next, note that when $k=1$, we aren't actually making any choices, so the decision cannot be influenced by the node utilities; in this case, we recover exactly the distribution $Q$ no matter what the utilities are. More precisely,\\
+	theorem
+	\begin{prop}
+		$\Psi^{(1)}(Q) = Q$
+	\end{prop}
+	\begin{prf}
+		\[ \Psi(Q)_{u,v} = \mathlarger{\sum}_{n \in V} \left[Q_{u,n} ~\cfrac{ e^{U_v}  (\mathbbm 1_{v = n})}{ e^{U_n} }\right] = \sum_{n \in V} Q_{u,n} \mathbbm 1_{v=n} = Q_{u,v} 
+		 \]
+	\end{prf}
+
+	\begin{prop}
+		In general, $\Psi^{(k)}Q = Q$ if and only if, for all $u, v \in V$, \[\displaystyle\mathop{\mathbb E}\limits_{n_1, \cdots n_k \sim (Q_u)^{k-1}} \Big[\mathrm{softmax}(U_{\{v, n_1, \cdots n_{k-1}\}})\Big] = \frac{1}{k}\]
+	\end{prop}
+	\begin{prf}
+		\begin{align*}
+			&&Q_{u,v} &= \Big[\Psi^{(k)}(Q)\Big]_{u,v} = \mathlarger{\sum}_{N \in V^{k}} \left[\left(\prod_{s \in N}Q_{u,s}\right) ~\cfrac{ e^{U_v}  (\mathbbm 1_{v \in N})}{ \displaystyle \sum\limits_{ s \in N } e^{U_s} } \right] \\
+			&\iff& Q_{u,v} &= k \mathlarger{\sum}_{N \in V^{k-1}} \left[\left(Q_{u,v}\prod_{s \in N}Q_{u,s}\right) ~\cfrac{ e^{U_v} }{ \displaystyle e^{U_v}+\sum\limits_{ s \in N } e^{U_s} } \right] \\
+			&\iff& \frac{1}{k} &=\mathlarger{\sum}_{N \in V^{k-1}} \left[\left(\prod_{s \in N}Q_{u,s}\right) ~\cfrac{ e^{U_v} }{ \displaystyle e^{U_v}+\sum\limits_{ s \in N } e^{U_s} } \right] \\
+			&& &= \mathop{\mathbb E}\limits_{n_1, \cdots n_k \sim (Q_u)^{k-1}} \Big[\mathrm{softmax}(U_{\{v, n_1, \cdots n_{k-1}\}})\Big]
+		\end{align*}
+	\end{prf}
+
+
+	\subsubsection{Independent Inclusion Neighborhoods}
+	While the above formulation works out nicely and the probability takes a convenient product form, it also has a hyperparameter $k$. Rather than restricting the size of $N$, we can select each node independently to be part of the choice set with probability $Q_{us}$. This may seem at first glance to be different, but is actually equivalent to a mixture of the above process with binomial coefficients. As a result, really we have not removed any extrinsic choices, but rather marginalized them out with an implicit choice of distribution over the length $k$. In general, for a general distribution $\lambda$ over $\mathbb N$, this means we have a transformer defined as 
+	
+	\begin{equation*}
+		\Big[\Psi^{\lambda}(Q)\Big]_{u,v} := \mathlarger{\mathlarger\sum}_{k \in \mathbb N} \lambda(k) \mathlarger{\sum}_{N \in V^{k}} \left[\left(\prod_{s \in N}Q_{u,s}\right) ~\cfrac{ e^{U_v}  (\mathbbm 1_{v \in N})}{ \displaystyle \sum\limits_{ s \in N } e^{U_s} } \right]
+	\end{equation*}
+	
+	\subsubsection{Binary Choice}
+	The complexity of calculating both of the above models is exponential in the highest value of $k$ that contributes a non-negligible probability mass. Therefore, as a final suggestion, we propose the following:
+	
+	\begin{equation*}
+		\Psi(Q;U)_{u,v} = \begin{cases}
+			\displaystyle Q_{u,v} ~\frac{\displaystyle 1}{\displaystyle 1 + e^{U_u - U_v}} & i \neq j \\
+			\displaystyle Q_{u,u} + \sum_{s: V} \frac{\displaystyle Q_{u,s}}{\displaystyle 1 + e^{U_s - U_u}}& i = j
+		\end{cases}
+	\end{equation*}
+	
+
+	
+%	However, one might not have knowledge of all of the nodes, but instead only samples of utilities from a small neighborhood of them. One might have various ways to get from one node to another, determined by transition probabilities, $P_{i,j}$
+	
+	\subsection{Individual Variation}
+	So far, we have assumed that there is a static utility function $U$ on the vertices of the graph, governing choice. For many applications, however, the utility data will not be entirely from an individual, but rather aggregated from an entire community. Let $\cal U$ denote the set of users, and 
+	
+	Suppose that each user $u \in \cal U$ has a utility $U^u$ over nodes over the graph. If they also each had their own, completely independent transition probabilities, then we would see an independent copy of the above theory for each user. Crucially, each user traverses the same graph, and so for now we assume that they share transition probabilities. 
+	
+	\section{Doubly Weighted Temporal Graphs}
+	We will now fold in material from the previous two sections to develop theory for graphs which have both vertex and edge weightings which vary over time. If $G \in \mathfrak T$ is a temporal graph, we would like to use utilities $U : V \to E$ to explain changes in the graph weights over time.  
+		
+	We can experimentally fit utility, kernel, and sample parameters, and use the residual error to gauge the effectiveness of the model.
+	
+	\[ H^* = \arg\min_{U,k,\phi} \Big\lVert \frac{\partial G}{\partial t} - \Psi^{(k)}(G;U)  \Big\rVert_\phi \]
+	
+	\section{Experiments and Results}
+	
+	\section{Discussion}
+	
+	\section{Implementation}
+	A large chunk of the work for this project was software engineering, and indeed one substantial contribution of this project is a collection of utilities for scraping, storing, manipulating, and plotting doubly weighted temporal graphs.
+	
+	\begin{itemize}
+		\item scrape these temporal graphs from \texttt{pushshift.io} data (also making use of the reddit API to retrieve comment scores) and expose a nice interface to perform operations with them: loading, saving, adding, and convolving them with temporal filters; tools for plotting various measures over time.
+		
+		\item 
+	\end{itemize}
+	
+	
+	The code is available at \url{https://github.com/orichardson/util-graph-dynamics}. 
+	
+	\subsection{Data Structures}
+	
+	\subsection{Scraping Reddit Data}
+	The \texttt{pushshift.io}
+	
+	\section{Future Work}
+	
+	
+	
+	
+%	\subsection{Discrete Case}
+%	
+%	\subsection{Continuous Case}
+	
+%	\section{Experiments}
+	
+	\printbibliography
+	
+	\appendix
+	%\section{Code}
+	%\pythonexternal{../code/reddit_graph_builders.py}
+	
+	
+%	\section{Motivation}
+%	When formalizing agency, there is a standard assumption that people act to satisfy preferences / utilities which do not change over time --- or at least they ought not to, if the agent is rational. Micro-economists model people in situations where preference changes are not particularly important and time scales are short. At the same time, those interested in machine agency give agents explicit \textit{reward functions} which are part of their identity and have no mechanism for change. This is reflected in the so-called Ghandi-folk theorem: if all you care about is the total number of published papers, why would you modify yourself to care about love? That doesn't publish more papers. 
+%	
+%	Humans, however, often do not have well-defined preferences, or have very poor access to them. Moreover, they often seem to change their fundamental goals, and obviously form new preferences about things they had previously never experienced or understood --- all of which seem perfectly compatible with rationality.
+%	
+%	Outside of this class, I'm looking to formalize the theory of rational preference change as a fused combined RL / IRL (inverse reinfocement learning) problem. However, this would be a much better theory if it were empirically validated --- I propose to use reddit as a source of purely frivolous preference data. The karma (upvote/downvote) associated with each post or comment can be thought of as a proxy for the collective preferences of the subset of the community who read and cared about the comment. This system was designed purely to sort through posts, but in doing so, it has exposed annotations of the ``good''-ness of large amounts of text and images in context.
+%	
+%	
+%	\section{Empirical Study}
+%	
+%	\subsection{Research Questions}
+%	Ultimately, we would like to know why people actually change their preferences: whether it is done in a consistent manner, and whether this can be considered rational. To this end, we will discuss the evolution of both individual users and communities' preferences over time. 
+%stable
+%	
+%	Below is a list of relevant questions that I expect to be able to shed some light on. I am aware that I will not have time for all of them.
+%	\begin{enumerate}
+%		\item Is there a scale symmetry between individuals and communities --- do the mechanisms by which they appear to change differ substantially beyond the time-scales and numbers of total interactions?
+%		
+%		\item To what degree do memes bleed from one community to another?
+%		\item What determines the lifetime of a meme, beyond noise? Are humans any good at it? We can use \texttt{r/MemeEconomy} to get data on humans predicting meme longevity, plus historical data about how good individuals have been in the past.
+%		
+%		\item What kinds of posts cause a sub to grow or shrink? 
+%		
+%		\item How do community preferences evolve over time, as measured directly by statistics of the content, and as measured by the topology of the interactions between users and communities?
+%	\end{enumerate}
+%
+%	
+%
+%
+%
+%	
+%
+%	\section{Outline of Experiments}
+%	Reddit can be thought of as a graph data set in a number of different ways; applying the numerical methods we covered in class may reveal different kinds of preference data.
+%
+%	\subsection{Content Representation $\mathcal T$}
+%		
+%	First, because I do not want to be doing complex NLP myself for the purposes of this project, I will need to import an existing space $\mathcal T$, and embedding $\eta: \Gamma \times \mathrm{Text} \times \mathrm{Image} \to \mathcal T$, where $\Gamma$ is a context space, equipped with an applicative structure $\mathrm{Text} \times \Gamma \to \Gamma$. This will allow me to embed posts, captions, and images, into a single space for convenience, and be a control for the network analyses that follow.
+%	
+%	\subsection{Subreddit Drift}
+%	The nodes are subs, and there are edges between them corresponding to top-level comments referencing a (different sub). These edges each have a weight and time associated with them (corresponding to the karma and date of thIfe comment), so we can apply the methods presented in class for analyzing temporal graphs.
+%	
+%	Temporal motifs here correspond to interactions between subs. Even simply by partitioning the graph into time windows, we can see how the subs move about in the induced preference space that we would expect from a node embedding. Moreover, these data can be compared from the data obtained from motion of the average post within the content space $\mathcal T$.
+%	
+%	Clustering will almost certainly reveal closely linked communities (probably even often explicitly, as many subreddits link to one another in side bars, and the graph generated by these edges can be compared to the one generated temporally through comment links). More importantly for my purposes, the clustering will likely change as time goes on -- when it changes, we would like to identify either graphical motifs or pieces of content space which tend to proceed shifts. Our hope is that the correlations and anti-correlations between content-space and co-reference space will shine some light on why these effects occur.
+%	
+%	\subsection{User Drift}
+%	The nodes are users, and there is an edge $i \to j$ when user $j$ comments on a post or comment made by $i$. These links also have both weights and times associated with them, for the same reasons. This is the structure which most directly addresses the question at hand, because users themselves are definitely agents, and the ways in which they interact with the site reflect their evolving preferences. However, because of small amounts of data for individual users, we expect that it will be difficult to identify a causal picture of this.
+%	
+%	\subsection{The Reddit Hierarchy and Flow}
+%	
+%	Comments, posts, and subs are all nodes, and edges between them are sub-post relations: each post has a parent-edge to its sub, and comments have edges to their posts or parent comments. Again, all of these entities have weights (karma / subscribers) and times. 
+%	
+%	In this case, we expect role labeling to recover which of the nodes are actually comments, posts and subs; this is a sanity check, and shows that the way that people interact with these elements 
+%	
+%	In some sense, this is the most boring network interpretation of the site, because it is the one shown to users and developers, and is simply an abstraction tree presented to the world. However, if we look at it as a temporally evolving tree, and we additionally consider it as the co-domain of the number of subscribers / karma, we may be able to discover more interesting structure. In particular, if attention is flowing through the graph based on this topology, we might ask if there is a stationary distribution on $\eta$-equivalence classes of nodes (perhaps community dependent), and ask how this stationary distribution shifts over time.
+%
+%	
+%	\section{Numerical Methods: Possibilities for Theoretical Advancement}
+%	
+%	I suspect that treating groups of users (potentially even large users) as a single users with well-defined preferences as users themselves, will result in very similar analyses. For this reason, we may want to understand graphs not in terms of their small-scale motifs, but rather scale-invariant ones. If I have additional time / energy, or this falls out of the project naturally, then I would like to formalize the effect of collapsing larger groups of nodes into a single one on motif analysis, and design one that is robust to this kind of . This is particularly important from the point of view of tropical geometry, in which collapsed vertices correspond to degenerate polynomials, which mostly behave in exactly the same way as every one of the graphs that they could represent.
+	
+\end{document}
