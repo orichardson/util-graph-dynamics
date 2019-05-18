@@ -3,11 +3,13 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{parskip}
-\usepackage[margin=0.7in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{amsthm}
 \usepackage{bbm}
 \usepackage{relsize}
+
+\usepackage{graphicx}
 
 \usepackage{thmtools}
 \declaretheoremstyle[%
@@ -32,7 +34,7 @@ qed=\qedsymbol%
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 
 \usepackage[colorlinks=true, citecolor=deepgreen]{hyperref}
-\usepackage{listings}
+%\usepackage{listings}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -44,32 +46,32 @@ qed=\qedsymbol%
 %\usepackage{courier}
 
 
-\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{9} % for bold
-\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{9}  % for normal
-
-\newcommand\pythonstyle{\lstset{
-		language=Python,
-		basicstyle=\footnotesize\ttm,
-		breaklines=true
-		otherkeywords={self},             % Add keywords here
-		keywordstyle=\ttb\color{deepblue},
-		emph={MyClass,__init__},          % Custom highlighting
-		emphstyle=\ttb\color{deepred},    % Custom highlighting style
-		stringstyle=\color{deepgreen},
-		frame=,                         % Any extra options here
-		showstringspaces=false            % 
-}}
-\lstnewenvironment{python}[1][]
-{
-	\pythonstyle
-	\lstset{#1}
-}
-{}
-
-% Python for external files
-\newcommand\pythonexternal[2][]{{
-		\pythonstyle
-		\lstinputlisting[#1]{#2}}}
+%\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{9} % for bold
+%\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{9}  % for normal
+%
+%\newcommand\pythonstyle{\lstset{
+%		language=Python,
+%		basicstyle=\footnotesize\ttm,
+%		breaklines=true
+%		otherkeywords={self},             % Add keywords here
+%		keywordstyle=\ttb\color{deepblue},
+%		emph={MyClass,__init__},          % Custom highlighting
+%		emphstyle=\ttb\color{deepred},    % Custom highlighting style
+%		stringstyle=\color{deepgreen},
+%		frame=,                         % Any extra options here
+%		showstringspaces=false            % 
+%}}
+%\lstnewenvironment{python}[1][]
+%{
+%	\pythonstyle
+%	\lstset{#1}
+%}
+%{}
+%
+%% Python for external files
+%\newcommand\pythonexternal[2][]{{
+%		\pythonstyle
+%		\lstinputlisting[#1]{#2}}}
 
 \author{Oliver Richardson (oer5)}
 \title{CS6241 Final Project: Mining Reddit for Preferences}
@@ -302,7 +304,7 @@ qed=\qedsymbol%
 	
 
 	
-%	However, one might not have knowledge of all of the nodes, but instead only samples of utilities from a small neighborhood of them. One might have various ways to get from one node to another, determined by transition probabilities, $P_{i,j}$
+%	However, one might not have knowledge of all of the nodes, but instead only samples of utilities from a small neighborhood of them. One datamight have various ways to get from one node to another, determined by transition probabilities, $P_{i,j}$
 	
 	\subsection{Individual Variation}
 	So far, we have assumed that there is a static utility function $U$ on the vertices of the graph, governing choice. For many applications, however, the utility data will not be entirely from an individual, but rather aggregated from an entire community. Let $\cal U$ denote the set of users, and 
@@ -318,13 +320,17 @@ qed=\qedsymbol%
 	
 	\section{Experiments and Results}
 	
+	While initially this was intended as a way to get 
+	
+	
+	
 	\section{Discussion}
 	
 	\section{Implementation}
 	A large chunk of the work for this project was software engineering, and indeed one substantial contribution of this project is a collection of utilities for scraping, storing, manipulating, and plotting doubly weighted temporal graphs.
 	
 	\begin{itemize}
-		\item scrape these temporal graphs from \texttt{pushshift.io} data (also making use of the reddit API to retrieve comment scores) and expose a nice interface to perform operations with them: loading, saving, adding, and convolving them with temporal filters; tools for plotting various measures over time.
+		\item Code to build these temporal graphs from \texttt{pushshift.io} data (also for querying the reddit API to retrieve more recent karma information) and save this in a uniform way.
 		
 		\item 
 	\end{itemize}
