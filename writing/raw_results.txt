@@ -1,3 +1,8 @@
+# Graph Naming Scheme: G{Δ}_{N} denotes a graph with $N$ nodes, and 
+# temporal resolution Δ. For instance G1D_10 has 10 nodes and 1-day slices.
+# G6W_500 has 500 nodes and 6-week temporal resolution.
+
+
 
 Score [0.00006581] computed for  trans_alt α=0.06+  for inclU =  norm10
 Score [0.00006625] computed for  trans_alt α=0.06*  for inclU =  norm10
@@ -38,15 +43,14 @@ Score [0.00672640] computed for  AvgQInv  for inclU =  norm0.1
 
 ---------- Expensive methods ---------
 
-Score [ 0.0000452292 ] computed for  $Q$  for inclU =  None
-Score [ 0.0001001574 ] computed for  SGDRegressor  for inclU =  None
-Score [ 0.0001005353 ] computed for  LinearSVR  for inclU =  None
-Score [ 0.0002100424 ] computed for  SVR  for inclU =  None
 Score [ 0.0000444338 ] computed for  trans_alt  for inclU =  norm10
 Score [ 0.0000452292 ] computed for  $Q$  for inclU =  norm10
 Score [ 0.0001122891 ] computed for  SGDRegressor  for inclU =  norm10
+Score [ 0.0001001574 ] computed for  SGDRegressor  for inclU =  None
 Score [ 0.0001467097 ] computed for  LinearSVR  for inclU =  norm10
+Score [ 0.0001005353 ] computed for  LinearSVR  for inclU =  None
 Score [ 0.0002098722 ] computed for  SVR  for inclU =  norm10
+Score [ 0.0002100424 ] computed for  SVR  for inclU =  None
 
 
 
@@ -62,7 +66,7 @@ Score [0.10079138] computed for  AvgQInv  for inclU =  norm10
 
 ======================== G4D_15 ==========================
 
-run_regressions(G4D_15, test_fraction=0.9)                                                           
+#run_regressions(G4D_15, test_fraction=0.9)                                 
 Score [0.00007000] computed for  trans_alt α=0.06+  for inclU =  norm10
 Score [0.00007035] computed for  trans_alt α=0.04+  for inclU =  norm10
 Score [0.00006948] computed for  trans_alt α=0.13+  for inclU =  norm10
@@ -77,10 +81,48 @@ Score [0.00010422] computed for  transform k=2 α=0.13+  for inclU =  norm30
 Score [0.00009997] computed for  $Q$  for inclU =  norm30
 Score [0.04577666] computed for  AvgQInv  for inclU =  norm30
 
-run_regressions(G4D_15, norm=10, test_fraction=1)   
+# run_regressions(G4D_15, norm=10, test_fraction=1)   
 Score [0.00009735] computed for  trans_alt α=0.06+  for inclU =  norm10
 Score [0.00009813] computed for  trans_alt α=0.04+  for inclU =  norm10
 Score [0.00009536] computed for  trans_alt α=0.13+  for inclU =  norm10
 Score [0.00010259] computed for  transform k=2 α=0.13+  for inclU =  norm10
 Score [0.00009997] computed for  $Q$  for inclU =  norm10
 Score [0.04577666] computed for  AvgQInv  for inclU =  norm10
+
+===================== G2_30 ======================== [OFFSET = 1]
+
+Score [0.00060786] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00061203] computed for  trans_alt α=0.04+  for inclU =  norm10
+Score [0.00059699] computed for  trans_alt α=0.13+  for inclU =  norm10
+Score [0.00059190] computed for  trans_alt α=0.2+  for inclU =  norm10
+Score [0.00062673] computed for  transform k=2 α=0.1+  for inclU =  norm10
+Score [0.00062178] computed for  $Q$  for inclU =  norm10
+Score [0.02309087] computed for  AvgQInv  for inclU =  norm10
+
+# run_regressions(G2D_30, offset=2, test_fraction=0.3)                             
+Score [0.00036121] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00036339] computed for  trans_alt α=0.04+  for inclU =  norm10
+Score [0.00035593] computed for  trans_alt α=0.13+  for inclU =  norm10
+Score [0.00035433] computed for  trans_alt α=0.2+  for inclU =  norm10
+Score [0.00037326] computed for  traLinearSVRnsform k=2 α=0.1+  for inclU =  norm10
+Score [0.00036865] computed for  $Q$  for inclU =  norm10
+Score [0.00179494] computed for  AvgQInv  for inclU =  norm10
+
+
+
+Score [0.00036121] computed for  trans_alt α=0.06+  for inclU =  norm10
+Score [0.00035593] computed for  trans_alt α=0.13+  for inclU =  norm10
+Score [0.00035433] computed for  trans_alt α=0.2+  for inclU =  norm10
+Score [0.00035543] computed for  trans_alt α=0.25+  for inclU =  norm10
+Score [0.00036325] computed for  trans_alt α=0.35+  for inclU =  norm10
+Score [0.00037326] computed for  transform k=2 α=0.1+  for inclU =  norm10
+Score [0.00037961] computed for  transform k=2 α=0.2+  for inclU =  norm10
+Score [0.00037326] computed for  transform k=3 α=0.1+  for inclU =  norm10
+Score [0.00036865] computed for  $Q$  for inclU =  norm10
+Score [0.00179118] computed for  AvgQInv  for inclU =  norm10
+Score [0.00042682] computed for  SGDRegressor  for inclU =  norm10
+Score [0.00044560] computed for  SGDRegressor  for inclU =  None
+Score [0.00077523] computed for  LinearSVR  for inclU =  norm10
+Score [0.00050996] computed for  LinearSVR  for inclU =  None
+Score [0.00150091] computed for  SVR  for inclU =  None
+Score [0.00145331] computed for  SVR  for inclU =  norm10

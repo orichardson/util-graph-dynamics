@@ -76,6 +76,17 @@ def trans_alt(Q, U):
     return A    
 
 
+################ META FUNCTIONS #################
+def mix(f, α):
+    def fmixed(Q, *ar, **kwar):
+        return α * (f(Q, *ar, **kwar)) + (1-α)* Q
+    return fmixed
+
+def uscale(f, r) :
+    def fuscaled(Q, U, **kwar):
+        return f(Q, U*r, **kwar)
+    return fuscaled
+    
     
 ## some tests ##    
 # Q_rand = stoch(np.random.rand(5,5))

@@ -1,0 +1,63 @@
+
+[Constant Method outperforms everything without interpolation, at all times]
+	t_vs_err/Q_id
+	t_vs_err/Q_2.png
+	
+	overlaid: t_vs_err/choice_vs_static2.png
+
+[Matrix Powers get Worse]
+	t_vs_err/Q_powers_halfway_all.png
+	-Eventually worse than noise		
+		t_vs_err/Q_powers_limit.png
+	
+[Isolation Accelerate]
+	t_vs_err/ (above)
+	dt_vs_er/Q_powers_no_conv.png
+
+	
+---------heatmaps--------
+
+[fractional powers of matrix get successively worse, but some of trans_alt get better]
+	heatmaps/multiiplicative_interp_Q,Q2,trans_alt.png
+
+
+[very small alpha doesn't help]
+	heatmaps/bestalpha_expanded.png
+
+[multiplicative and linear scaling very similar]
+	heatmaps/t_mult,t_lin.png
+
+--------- uscale ----------
+[The utilities outperform the laplacian]
+	Worry:
+		uscale/G2D30_a07_big.png
+		uscale/G1W100_a07_big.png
+	uscale/G2D30_a07.png
+	uscale/G2D30_a15.png
+
+	(norms don't matter very much)
+		heatmaps/u_norms_log,norm5,norm10,norm30,div1k.png
+
+
+---- dt_vs_err ----------
+[Number of Nodes dictates forward or backward bias]
+	Balanced
+		dt_vs_err/balanced_G4D_15.png
+		
+	Backwards
+		dt_vs_err/better_at_past_G4D_9.png
+
+	Forwards
+		dt_vs_err/G2D_30.png
+		dt_vs_err/better_in_future_G1W_100.png
+
+
+------------ tables -----------
+[Transalt outperforms everything]
+	- independent of graph
+	- for multiple offsets
+	- for any norm
+	-avgqinv sucks
+
+[SGDRegressor, SVR all better with U] 
+	Consistently. LinearSVR?No.
