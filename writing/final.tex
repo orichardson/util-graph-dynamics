@@ -81,6 +81,7 @@ qed=\qedsymbol%
 	
 	\section{Introduction}
 	
+	
 	\section{Related Work}
 	
 	\section{Temporal Graph Representations}
@@ -318,21 +319,37 @@ qed=\qedsymbol%
 	
 	\[ H^* = \arg\min_{U,k,\phi} \Big\lVert \frac{\partial G}{\partial t} - \Psi^{(k)}(G;U)  \Big\rVert_\phi \]
 	
-	\section{Experiments and Results}
+	\section{Experiments}
+	The second branch of this project is an empirical one:
 	
-	While initially this was intended as a way to get 
+	In this case, our doubly weighted temporal graphs are formed by reddit data --- in this approach, we view Reddit as a temporal graph, in which the nodes are subreddits, and the edges are links between them, i.e., in subreddit \texttt{r/A} a user might post a comment containing the string \texttt{r/B}. To someone who hasn't interacted with the site much, such links may  not seem like a very strong signal, but in fact it is an incredibly common contribution, and can carry a great deal of information: it is almost like a 
+	
+	Given a stochastic transition matrix $Q_t$, arising from the column-normalized weight matrix of a the graph a time $t$, can we use the discrete choice models discussed above to predict the transition matrix at time $Q_{t + \Delta T}$ at some future time $t + \Delta T$? 
+	
+	\subsection{Models}
+	\subsubsection{Constant Function.} The easiest thing to do (which turns out to be very difficult to beat), is to predict that the transition matrix does not change, i.e., $Q_{t+\Delta T} = Q$.
+
+
+	\subsection{}
+	
+	\begin{enumerate}
+		\item 
+		\item \textbf{Matrix powers}: predict $Q_{t+\Delta T} = Q^{n}$ for some $n \in \mathbb N$
+		\item \textbf{SVMs}
+	\end{enumerate}	
 	
 	
-	
-	\section{Discussion}
+	\section{Results and Discussion}
 	
 	\section{Implementation}
 	A large chunk of the work for this project was software engineering, and indeed one substantial contribution of this project is a collection of utilities for scraping, storing, manipulating, and plotting doubly weighted temporal graphs.
 	
 	\begin{itemize}
-		\item Code to build these temporal graphs from \texttt{pushshift.io} data (also for querying the reddit API to retrieve more recent karma information) and save this in a uniform way.
+		\item Code to build these temporal graphs from \texttt{pushshift.io} data, query the Reddit API to retrieve more recent karma information, and make the resulting data structure easy to load and save.
 		
-		\item 
+		\item Experimental utilties
+		
+		\item Plotting methods specific to 
 	\end{itemize}
 	
 	
