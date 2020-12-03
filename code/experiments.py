@@ -248,18 +248,21 @@ def run_heatmaps( TG : TGraph, result_dict = rsltdict()):
 	
 
 	
-def run_regressions( TG : TGraph, include_expensive=False, test_fraction=0.15, norm=10):
+def run_regressions( TG : TGraph, include_expensive=False, test_fraction=0.15, norm=10, offset=1):
 	import warnings
 	predictors = [
 		SKWrapper(name="trans_alt α=0.06+", f = trans_alt, alpha = 0.06, interp='linear'),
 		#SKWrapper(name="trans_alt α=0.06*", f = trans_alt, alpha = 0.06, interp='multiplicative'),
-		SKWrapper(name="trans_alt α=0.04+", f = trans_alt, alpha = 0.04, interp='linear'),
+		#SKWrapper(name="trans_alt α=0.04+", f = trans_alt, alpha = 0.04, interp='linear'),
 		#SKWrapper(name="trans_alt α=0.04*", f = trans_alt, alpha = 0.04, interp='multiplicative'),
 		SKWrapper(name="trans_alt α=0.13+", f = trans_alt, alpha = 0.13, interp='linear'),
 		SKWrapper(name="trans_alt α=0.2+", f = trans_alt, alpha = 0.2, interp='linear'),
+		SKWrapper(name="trans_alt α=0.25+", f = trans_alt, alpha = 0.25, interp='linear'),
+		SKWrapper(name="trans_alt α=0.35+", f = trans_alt, alpha = 0.35, interp='linear'),
 		#SKWrapper(name="trans_alt α=0.11*", f = trans_alt, alpha = 0.11, interp='multiplicative'),
-		#SKWrapper(name="transform k=2 α=0.13+", f = partial(transform,k=2), alpha = 0.13, interp='linear'),
-
+		SKWrapper(name="transform k=2 α=0.1+", f = partial(transform,k=2), alpha = 0.1, interp='linear'),
+		SKWrapper(name="transform k=2 α=0.2+", f = partial(transform,k=2), alpha = 0.2, interp='linear'),
+		SKWrapper(name="transform k=3 α=0.1+", f = partial(transform,k=2), alpha = 0.1, interp='linear'),
 		SKWrapper(name="$Q$", f = lambda Q, U : Q ),
 		AvgQInv(),
 	]
@@ -273,7 +276,7 @@ def run_regressions( TG : TGraph, include_expensive=False, test_fraction=0.15, n
 	run_regressions.results = results # save progress
 	
 	for incl_Us in ['norm'+str(norm)] + ([None] if include_expensive else []):
-		data = make_learning_problem(TG, offset = 1, incl_Us = incl_Us, testfraction=test_fraction)
+		data = make_learning_problem(TG, offset = offset, incl_Us = incl_Us, testfraction=test_fraction)
 
 		for predictor in predictors + (expensive_predictors if include_expensive else []):
 			try:
@@ -285,7 +288,6 @@ def run_regressions( TG : TGraph, include_expensive=False, test_fraction=0.15, n
 				print('Score [%0.8f] computed for '%e, predictor_name(predictor), ' for inclU = ', incl_Us)
 			except Exception as e:
 				print('!!',predictor_name(predictor),'!!\t ', e)
-				raise
 				
 	return results
 	

@@ -1,0 +1,4804 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from temporal import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experimental import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from temporal import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TGraph"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TG = gload(\"G1W_100\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Vs = TG.Vs()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Vs = TG.V()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TG.Gs[0].nodes[Vs[2]]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TG.Gs[0].edges['AskReddit', 'AskReddit']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "    stackedweights = stoch3(self.Ws()).reshape(len(TG.Gs), -1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "stackedweights = stoch3(TG.Ws()).reshape(len(TG.Gs), -1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "stackedweights.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "[1,2,3,4][:2]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "[1,2,3,4][2:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TG.Us()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(Us)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(TG.Us())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Vs"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%load_ext autoload"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%load_ext autoreload"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%autoreload 2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = make_learning_problem(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = make_learning_problem(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = make_learning_problem(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.linear_model import LogisticRegression, SGDRegressor"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LogisticRegression(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "clf = LogisticRegression(multi_class='multinomial').fit(X_train, Y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "clf = SVR().fit(X_train, Y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "clf = SVR().fit(X_train, Y_train[:,0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.metrics import mean_squared_error\n",
+    "y_true = [3, -0.5, 2, 7]\n",
+    "y_pred = [2.5, 0.0, 2, 8]\n",
+    "mean_squared_error(y_true, y_pred)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.metrics import mean_squared_error\n",
+    "y_true = [3, -0.5, 2, 7]\n",
+    "y_pred = [2.5, 0.0, 2, 8]\n",
+    "mean_squared_error(y_true, y_pred)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from numpy import linalg"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(np.array(y_true) - np.array(y_pred))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(np.array(y_true) - np.array(y_pred), fro)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(np.array(y_true) - np.array(y_pred), 'fro')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(np.array(y_true) - np.array(y_pred), 2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q = stoch(np.random.rand((9,9)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q = stoch(np.random.rand(9,9))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mean_squared_error(Q, Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q2 = stoch(np.random.rand(9,9))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mean_squared_error(Q, Q2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(Q-Q2) / 81"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(Q.flatten()-Q2.flatten()) / 81"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mean_squared_error(Q.flatten(), Q2.flatten())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "_50/49"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "1/_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "_50/_49"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "((Q - Q2)**2).mean()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "((Q - Q2)**2).mean()*9*9"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "((Q-Q2)**2).sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(Q-Q2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "linalg.norm(Q-Q2)**2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.mean([0,1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.mean([0,1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.mean([0,1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "SVR()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "_.name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "type(_64)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 65,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "type(_62)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "str(_)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "repr(type(_62))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 68,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "str(type(_62))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "type(_62)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "typeof(_62).Name"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "type(SVR)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 73,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "type(_62).__name__"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 74,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 75,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SVR(), LogisticRegression()], ((X_train, Y_train), (X_test, Y_test)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_train.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_train.shape[1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 78,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SVR(), LogisticRegression()], ((X_train, Y_train), (X_test, Y_test)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 79,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SVR()], ((X_train, Y_train), (X_test, Y_test)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(np.sqrt(4*(9*10) + 1) - 1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 81,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(np.sqrt(4*(9*10) + 1) - 1)/2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 82,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = [1,2,]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 85,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 86,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x = [1,2,]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 87,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.array(np.array([1,2]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 88,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "3 * [1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 89,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "0.2 * [1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 90,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.multiply(0.3,[1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q.inf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q.inv"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 94,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q.imag"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 95,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim(SKWrapper(lambda Q, U: Q), data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 96,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import SKWrapper"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 97,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 98,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data = (X_train, Y_train), (X_test, Y_test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 99,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim(SKWrapper(lambda Q, U: Q), data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 100,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 101,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 102,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 103,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.size(Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 104,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 105,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 106,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 107,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "clear"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 108,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 109,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 110,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_train.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 111,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_test.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 112,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_train.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 113,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = make_learning_problem(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 114,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 115,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(X_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 116,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 117,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "int(np.sqrt(10000))**2 == 10000"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 118,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 119,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 120,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_train[0] == Y_train[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 121,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_test[0] == Y_test[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 122,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.all(X_test[0] == Y_test[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 123,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "stackedweights = stoch3(TG.Ws()).reshape(len(TG.Gs), -1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 124,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "split_idx = int(len(TG.Gs) * (1-0.15))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 125,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "stackedweights.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 126,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.arange(105)[:, None].shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 127,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.zeros(stackedweights.shape)+ np.arange(105)[:, None].shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 128,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.zeros(stackedweights.shape)+ np.arange(105)[:, None]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 129,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "test_stacked=np.zeros(stackedweights.shape)+ np.arange(105)[:, None]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 130,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs = test_stacked"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 131,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Us = np.zeros((105,100)) - np.arange(105)[:, None]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 132,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs = np.hstack(Xs, Us)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 133,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs = np.hstack([Xs, Us])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 134,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 135,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 136,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs = Xs[:-1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 137,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Xs"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 138,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Ys = test_stacked[1:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 139,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Ys"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 140,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_train, X_test = Xs[:split_idx], Xs[split_idx:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 141,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_train"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 142,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_test"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 143,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_train, Y_test = Ys[:split_idx], Xs[split_idx:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 144,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_train"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 145,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Y_test"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 146,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = make_learning_problem(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 147,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 148,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data = make_learning_problem(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 149,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q)], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 150,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q), SVR()], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 151,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q), SVR(gamma='scale')], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 152,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "error_multidim([SKWrapper(lambda Q, U: Q), SVR(gamma='scale')], data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 153,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from plotting import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 154,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from plotting import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 155,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from plotting import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 156,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import frozenset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 157,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from collections import froz"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 158,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "frozenset(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 159,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from collections import froz"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 160,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from plotting import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 161,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class dotdict(dict):\n",
+    "    \"\"\"dot.notation access to dictionary attributes\"\"\"\n",
+    "    __getattr__ = dict.get\n",
+    "    __setattr__ = dict.__setitem__\n",
+    "    __delattr__ = dict.__delitem__\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 162,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dotdict(a=4)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 163,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "_.a"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 164,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%hist"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 165,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 166,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import run_all_regressions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 167,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 168,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 169,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 170,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 171,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 172,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mean_squared_error(Q, Q.reshape(1,-1))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 173,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mean_squared_error(Q, Q.reshape(1,-1))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 174,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 175,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 176,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 177,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 178,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "frozendict(a=3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 179,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from collections import frozendict"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 180,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from collections import frozendict"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 181,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 182,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.divide"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 183,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 184,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 185,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 186,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.divide"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 187,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 188,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.range(Qs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 189,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Us"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 190,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Us_test = Us"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 191,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "make_learning_problem(TG, incl_Us='log')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 192,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data = _"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 193,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 194,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_train.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 195,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X_train[1,-100:]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 196,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = {}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 197,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 198,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a[4] = b = 7"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 199,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 200,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a[4]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 201,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b = a[4] = 1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 202,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a[4]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 203,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "b"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 204,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 205,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 206,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 207,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 208,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 209,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 210,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "stoch(stoch(Q)) =  stoch(Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 211,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "stoch(stoch(Q)) ==  stoch(Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 212,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.allclose(stoch(stoch(Q)) -Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 213,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.allclose(stoch(stoch(Q)),Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 214,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.allclose(stoch(Q @ Q),Q @ Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 215,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 216,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import LOG"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 217,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 218,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[-1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 219,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.isnan(LOG[-1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 220,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.any(np.isnan(LOG[-1]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 221,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.sum(np.isnan(LOG[-1]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 222,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.sum((LOG[-1])**0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 223,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 224,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 225,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results.AlphaMap"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 226,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap'].trans_alt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 227,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sum(_)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 228,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.sum(_)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 229,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 230,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 231,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap'].trans_alt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 232,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 233,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 234,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 235,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 236,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[-1][1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 237,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[-1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 238,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 239,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x.append([3,4])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 240,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 241,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(LOG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 242,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[:] = []"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 243,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 244,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 245,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 246,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experimentents import LOG"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 247,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import LOG"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 248,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 249,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pred = LOG[-1][0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 250,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.any(np.isnan(pred))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 251,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.sum(np.isnan(pred))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 252,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 253,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.all"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 254,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 255,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 256,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 257,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 258,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 259,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 260,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 261,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[-1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 262,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q = LOG[-1][0][0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 263,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 264,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q.reshape(100,100)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 265,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.argwhere(np.isnan(Q))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 266,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.any(np.isnan(Q))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 267,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.any(np.isnan(LOG[-1][0][1]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 268,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.any(np.isnan(LOG[-1][0][-1]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 269,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(LOG[-1][0][-1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 270,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.sum(np.isnan(LOG[-1][0][-1]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 271,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.argwhere(np.isnan(LOG[-1][0][-1]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 272,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.argwhere(np.isnan(LOG[-1][0][-1]).reshape(100,100))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 273,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[-1][1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 274,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "LOG[-1][1].predict(Q)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 275,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Q"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 276,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data = make_learning_problem(TG, clear_diag=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 277,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(X_train, Y_train), (X_test, Y_test) = data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 278,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sum(np.isnan(X_test))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 279,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.sum(np.isnan(X_test))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 280,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 281,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 282,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rslts = _"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 283,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rslts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 284,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rslts['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 285,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(rslts['AlphaMap']['$Q$'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 286,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 287,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rslts = rslts['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 288,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(rslts['$Q$'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 289,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(rslts['$Q$']);plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 290,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(rslts['$Q^2$']);plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 291,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(rslts['$Q^2$']);plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 292,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 293,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rslts = rslts['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 294,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "rslts = _['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 295,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 296,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(heatmaps.transalt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 297,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(heatmaps.trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 298,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "for x in 'linear','asdf': print(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 299,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "{}.iteritems"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 300,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "{}.items()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 301,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 302,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 303,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 304,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 305,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 306,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 307,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 308,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 309,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions.results['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 310,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 311,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 312,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions.results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 313,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 314,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_all_regressions(TG)['AlphaMap']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 315,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps.keys()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 316,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fz"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 317,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import fx"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 318,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import fz"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 319,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hetamaps[fz(clear_diag=False, interp='multiplicative', name='$Q^2$')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 320,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q^2$')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 321,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q^2$')])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 322,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q$')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 323,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q$')])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 324,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mQ = heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q$')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 325,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mQ2 = heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q^2$')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 326,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(np.vstack(mQ, mQ2))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 327,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mshow(np.vstack((mQ, mQ2)))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 328,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(np.vstack(mQ, mQ2), cmap='inferno_r')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 329,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(np.vstack((mQ, mQ2)), cmap='inferno_r')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 330,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 331,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTa = heatmaps[fz(clear_diag=False, interp='multiplicative', name='trans_alt')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 332,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(np.vstack((mQ, mQ2, mtA)), cmap='inferno_r')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 333,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(np.vstack((mQ, mQ2, mTa)), cmap='inferno_r')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 334,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 335,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1+np.vstack((mQ, mQ2, mTa))), cmap='inferno')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 336,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 337,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(0.00001+np.vstack((mQ, mQ2, mTa))), cmap='inferno')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 338,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 339,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ, mQ2, mTa))), cmap='inferno')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 340,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 341,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ, mQ2, mTa))), cmap='inferno')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 342,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.axis('off')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 343,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 344,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 345,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure(dpi=200)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 346,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ, mQ2, mTa))), cmap='inferno')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 347,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 348,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ, mQ2, mTa))), cmap='inferno')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 349,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 350,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ, mQ2, mTa))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 351,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTaA = heatmaps[fz(clear_diag=False, interp='additive', name='trans_alt')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 352,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTaA = heatmaps[fz(clear_diag=False, interp='linear', name='trans_alt')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 353,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ,  mTa))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 354,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(-np.log(1E-15+np.vstack((mQ,  mTa))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 355,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack((mQ,  mTa))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 356,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack((mQ[1:],  mTa[1:]))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 357,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack((mQ,  mTa, mTaA))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 358,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTaA = mTaA.fliprl(mTaA)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 359,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTaA = mTaA.fliplr(mTaA)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 360,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTaA = np.fliplr(mTaA)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 361,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack((mQ,  mTa, mTaA))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 362,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack(( mTa, mTaA))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 363,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mTaCD = heatmaps[fz(clear_diag=True, interp='linear', name='trans_alt')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 364,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack((mTaCD, ))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 365,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "mQ2m = heatmaps[fz(clear_diag=False, interp='multiplicative', name='$Q^2$')]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 366,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack((mQ2m, ))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 367,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dict(a = 4, **{'a':5})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 368,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = heatmaps.copy()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 369,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = heatmaps.deep_copy()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 370,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import copy"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 371,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "H = copy.deep_copy(heatmaps)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 372,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "H = copy.deepcopy(heatmaps)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 373,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hms = run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 374,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hms = run_all_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 375,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hms = hms.AlphaMap"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 376,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "hms"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 377,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.matshow(1/(1E-15+np.vstack(list(hms.values()))), cmap='inferno'); plt.axis('off'); plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 378,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import run_heatmaps"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 379,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 380,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 381,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 382,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 383,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "H"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 384,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "H.keys()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 385,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import rsltdict"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 386,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "class rsltdict(dict):\n",
+    "\t\"\"\"For frozen set items keys (dict keys), want to query results in any order\"\"\"\n",
+    "\t__getattr__ = dict.get\n",
+    "\t__setattr__ = dict.__setitem__\n",
+    "\t__delattr__ = dict.__delitem__\n",
+    "\n",
+    "\tdef query(self, q = '', **kwargs):  \n",
+    "\t\tmax_score = (0,0) #kwarg matches, max arg similarity, lexicographically ordered.\n",
+    "\t\targ_max = None\n",
+    "\t\tfor k,v in self.items():\n",
+    "\t\t\tmatchlength = max(  \\\n",
+    "\t\t\t \tSequenceMatcher(None, q, str(v)).find_longest_match(0, len(q), 0, len(str(v))).size \\  \n",
+    "\t\t\t\t\tfor v in  dict(k).values() )\n",
+    "\t\t\tscore = (len(set(kwargs.items()) & k), matchlength)\n",
+    "\t\t\t\n",
+    "\t\t\tif score > max_score:\n",
+    "\t\t\t\tmax_score = score\n",
+    "\t\t\t\targ_max = v\t\t\t\n",
+    "\t\t\t\n",
+    "\t\treturn arg_max"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 387,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import rsltdict"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 388,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import rsltdict"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 389,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Hq = rsltdict(H)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 390,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Hq.query(\"100\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 391,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Hq.query(\"$Q\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 392,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Hq.query(\"$Q$\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 393,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Hq.query(\"$Q^$\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 394,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 395,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 396,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_heatmaps.results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 397,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 398,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_heatmaps.results"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 399,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_heatmaps.results.query('norm5')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 400,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 401,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from plotting import matplots"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 402,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots(_399)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 403,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "q = run_heatmaps.query"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 404,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "q = run_heatmaps.results.query"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 405,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots(q('log'), q('norm5'), q('norm10'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 406,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 407,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "heatmaps = run_heatmaps(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 408,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "q = run_heatmaps.results.query"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 409,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots(q('log'), q('norm5'), q('norm10'), q('norm30'), q('div'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 410,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots(*map(stoch, q('log'), q('norm5'), q('norm10'), q('norm30')), q('div'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 411,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots(*map(stoch, [q('log'), q('norm5'), q('norm10'), q('norm30')]), q('div'))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 412,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matplots(stoch(q('log')), stoch(q('norm5')),stoch(q('norm10')), stoch(q('norm30')), stoch(q('div')))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 413,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import run_regressions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 414,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 415,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 416,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 417,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 418,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 419,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 420,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 421,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 422,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 423,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 424,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 425,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 426,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 427,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 428,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 429,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 430,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(TG)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 431,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from reddit_graph_builders import make_postshift_graph"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 432,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1D_20 = make_postshift_graph(20, start_ts=datetime(2015,4,5), end_ts=(2015,12,2), dt = timedelta(days=1), min_comments=9)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 433,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "graph_cache = []"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 434,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1D_20 = make_postshift_graph(20, start_ts=datetime(2015,4,5), end_ts=(2015,12,2), dt = timedelta(days=1), min_comments=9, graph_cache=graph_cache)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 435,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1D_20 = make_postshift_graph(20, start_ts=datetime(2015,4,5), end_ts=(2015,12,2), dt = timedelta(days=1), min_comments=9, graph_cache=graph_cache, comment_support=None)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 436,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G4D_15 = make_postshift_graph(15, start_ts=datetime(2015,4,5), end_ts=(2015,12,2), dt = timedelta(days=4), min_comments=9, graph_cache=graph_cache, comment_support=None)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 437,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G4D_15.save()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 438,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from plotting import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 439,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 440,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=20)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 441,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=20)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 442,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=40)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 443,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=50)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 444,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(G4D_15, test_fraction=0.9)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 445,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=50)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 446,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=30)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 447,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, width=40)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 448,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1D_20 = make_postshift_graph(20, start_ts=datetime(2013,7,5), end_ts=(2015,12,2), dt = timedelta(days=2), min_comments=9, graph_cache=graph_cache, comment_support=None)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 449,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "graph_cache = []"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 450,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1D_20 = make_postshift_graph(20, start_ts=datetime(2013,7,5), end_ts=(2015,12,2), dt = timedelta(days=2), min_comments=9, graph_cache=graph_cache, comment_support=None)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 451,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1D_20 = make_postshift_graph(30, start_ts=datetime(2013,7,5), end_ts=(2015,12,2), dt = timedelta(days=2), min_comments=9, graph_cache=graph_cache, comment_support=None)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 452,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G2D_20 = G1D_20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 453,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G2D_20.save()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 454,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G2D_20.filename"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 455,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G2D_30 = G1D_20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 456,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "del G1D_20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 457,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "del G2D_20"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 458,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_all_regressions(G2D_30, test_fraction=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 459,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(G2D_30, test_fraction=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 460,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 461,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 462,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, trans_alt, msize=2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 463,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, trans_alt, msize=2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 464,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, trans_alt, msize=2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 465,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, trans_alt, msize=2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 466,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%hist"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 467,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import mix"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 468,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import mix"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 469,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import mix"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 470,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import mix"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 471,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(G2D_30, offset=2, test_fraction=0.3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 472,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import run_regressions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 473,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from experiments import run_regressions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 474,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(G2D_30, offset=2, test_fraction=0.3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 475,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(G2D_30, offset=2, test_fraction=0.3, include_expensive=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 476,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "run_regressions(G2D_30, offset=2, test_fraction=0.3, include_expensive=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 477,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 478,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 479,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import scaleus"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 480,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from choice import uscale"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 481,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt, uscale, \"r\", [0.01, 0.1, 0.5, 1, 2, 5]) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 482,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0.01, 0.1, 0.5, 1, 2, 5]) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 483,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 484,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 485,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 486,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, trans_alt)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 487,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0.01, 0.1, 0.5, 1, 2, 5]) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 488,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5]) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 489,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5]) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 490,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=15) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 491,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=1) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 492,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=1) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 493,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=10) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 494,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(G4D_15.Gs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 495,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "63//2 - 1//2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 496,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "E_static.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 497,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(Es)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 498,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(E)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 499,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(G4D_15.Gs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 500,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(G4D_15.Gs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 501,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(G4D_15.Gs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 502,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(G4D_15.Gs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 503,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=10) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 504,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "T, Es = _"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 505,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=10) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 506,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "T, Es = _"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 507,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Es.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 508,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(Es)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 509,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def chop(*ars, ends=len(TG.Gs)//2 - width//2 ):\n",
+    "\t\treturn [a[ends:-ends] for a in ars]\n",
+    "        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 510,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def chop(*ars, ends ):\n",
+    "\t\treturn [a[ends:-ends] for a in ars]\n",
+    "        \n",
+    "        "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 511,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(chop(Es,31))       "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 512,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(chop(Es,ends=31))       "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 513,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=10) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 514,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(chop(*Es,ends=31)) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 515,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(chop(*Es,ends=1)) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 516,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.shape(Es)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 517,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "len(G4D_15.Gs)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 518,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "63*2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 519,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G4D_15, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=10) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 520,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=50) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 521,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.15), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=100) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 522,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.07), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=100) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 523,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.07), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=50) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 524,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "TG.V()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 525,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G2D_30, mix(trans_alt,0.07), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=100) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 526,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "G1W_100 = gload('G1W_100')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 527,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G1W_100, mix(trans_alt,0.07), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=100) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 528,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot_errs_vs_dt_geni(G1W_100, mix(trans_alt,0.07), uscale, \"r\", [0, 0.01, 0.1, 0.5, 1, 2, 5], width=50) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 529,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%notebook"
+   ]
+  }
+ ],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
